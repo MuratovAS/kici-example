@@ -12,7 +12,7 @@ jobs:
     env:
       CORRECTIONCPLURL: "https://raw.githubusercontent.com/Artel-Inc/metadata/refs/heads/main/correction_cpl_jlc.csv"
       # PRJ_VERSION: ${GITHUB_REF_NAME}
-      PRJ_REPO: ${{ github.event.repository.name }
+      PRJ_REPO: ${{ github.event.repository.name }}
       KIPRJ_DIR_ARRAY: "hardware*"
     steps:
     - name: Check out repository code

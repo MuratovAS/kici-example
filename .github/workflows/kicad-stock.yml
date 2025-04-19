@@ -1,9 +1,9 @@
 name: "KiCad Stock"
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  # push:
+  #   tags:
+  #     - 'v*.*.*'
   workflow_dispatch:
 
 env:
