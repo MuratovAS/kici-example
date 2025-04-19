@@ -21,10 +21,10 @@ jobs:
       # PRJ_VERSION: ${GITHUB_REF_NAME}
       PRJ_REPO: ${{ github.event.repository.name }}
       KIPRJ_DIR_ARRAY: "hardware*"
-      # BOMVERIFIERARG: "-qty=1 -lcsc=sku -lcscRW=pn -promelec -elitan"
-      # PREVCOLUMN: "qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock,promelec_consistent,promelec_stock,elitan_consistent,elitan_enough"
-      BOMVERIFIERARG: "-lcsc=sku -lcscRW=pn"
-      PREVCOLUMN: "qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock"
+      # BOMVERIFIERARG: "-lcsc=sku -lcscRW=pn"
+      # PREVCOLUMN: "qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock"
+      BOMVERIFIERARG: "-lcsc=sku -lcscRW=pn -promelec -elitan"
+      PREVCOLUMN: "qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock,promelec_consistent,promelec_stock,elitan_consistent,elitan_enough"
     steps:
     - name: Check out repository code
       uses: actions/checkout@v4

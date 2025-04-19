@@ -11,7 +11,6 @@ env:
 permissions:
   contents: write
   issues: write
-  # pull-requests: write
 
 jobs:
   Order:
@@ -23,8 +22,10 @@ jobs:
         SOCKS5_PASSWORD: ${{ secrets.SOCKS5_PASSWORD }}
         USERAGENTURL: "https://raw.githubusercontent.com/Artel-Inc/metadata/refs/heads/main/userAgent.txt"
         PRJ_REPO: ${{ github.event.repository.name }}
-        BOMVERIFIERARG: "-lcsc=sku -lcscRW=pn"
-        PREVCOLUMN: "qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock"
+        # BOMVERIFIERARG: "-lcsc=sku -lcscRW=pn"
+        # PREVCOLUMN: "qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock"
+        BOMVERIFIERARG: "-lcsc=sku -lcscRW=pn -promelec -elitan"
+        PREVCOLUMN: "qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock,promelec_consistent,promelec_stock,elitan_consistent,elitan_enough"
     steps:
     - name: Check out repository code
       uses: actions/checkout@v4
