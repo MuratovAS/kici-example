@@ -13,7 +13,7 @@ permissions:
 jobs:
   Command:
     runs-on: ubuntu-latest
-    container: container: ghcr.io/muratovas/kici:9
+    container: ghcr.io/muratovas/kici:9
     steps:
     - name: Check out repository code
       uses: actions/checkout@v4
