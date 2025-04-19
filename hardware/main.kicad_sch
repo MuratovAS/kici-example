@@ -3373,7 +3373,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 100.33 0)
 			(effects
 				(font
@@ -3682,7 +3682,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 46.99 0)
 			(effects
 				(font
@@ -3842,7 +3842,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 85.09 0)
 			(effects
 				(font
@@ -3937,7 +3937,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 62.23 0)
 			(effects
 				(font
@@ -4831,7 +4831,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 153.67 0)
 			(effects
 				(font
@@ -5268,7 +5268,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 146.05 0)
 			(effects
 				(font
@@ -5608,7 +5608,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 92.71 0)
 			(effects
 				(font
@@ -5703,7 +5703,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 115.57 0)
 			(effects
 				(font
@@ -6149,7 +6149,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 123.19 0)
 			(effects
 				(font
@@ -6423,7 +6423,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 77.47 0)
 			(effects
 				(font
@@ -6518,7 +6518,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 138.43 0)
 			(effects
 				(font
@@ -6736,7 +6736,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 39.37 0)
 			(effects
 				(font
@@ -6945,7 +6945,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 107.95 0)
 			(effects
 				(font
@@ -7188,7 +7188,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 54.61 0)
 			(effects
 				(font
@@ -7577,7 +7577,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 69.85 0)
 			(effects
 				(font
@@ -7803,7 +7803,7 @@
 				(hide yes)
 			)
 		)
-		(property "lcsc" "C99772"
+		(property "lcsc" "C00000"
 			(at 158.75 130.81 0)
 			(effects
 				(font
