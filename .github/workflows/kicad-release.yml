@@ -11,14 +11,14 @@ jobs:
     container: ghcr.io/muratovas/kici:9
     env:
       CORRECTIONCPLURL: "https://raw.githubusercontent.com/Artel-Inc/metadata/refs/heads/main/correction_cpl_jlc.csv"
-      PRJ_VERSION: ${GITHUB_REF_NAME}
-      PRJ_REPO: ${GITHUB_REPOSITORY#*/}
+      # PRJ_VERSION: ${GITHUB_REF_NAME}
+      PRJ_REPO: ${{ github.event.repository.name }
       KIPRJ_DIR_ARRAY: "hardware*"
     steps:
     - name: Check out repository code
       uses: actions/checkout@v4
     - name: Building production files
-      run: kicadRelease.sh -s -p -g -c -a -b -i -l
+      run: PRJ_VERSION=${GITHUB_REF_NAME} kicadRelease.sh -s -p -g -c -a -b -i -l
     - name: Publishing production files
       uses: softprops/action-gh-release@v1
       with:

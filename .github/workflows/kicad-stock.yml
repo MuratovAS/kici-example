@@ -18,8 +18,8 @@ jobs:
       SOCKS5_USERNAME: ${{ secrets.SOCKS5_USERNAME }}
       SOCKS5_PASSWORD: ${{ secrets.SOCKS5_PASSWORD }}
       USERAGENTURL: "https://raw.githubusercontent.com/Artel-Inc/metadata/refs/heads/main/userAgent.txt"
-      PRJ_VERSION: ${GITHUB_REF_NAME}
-      PRJ_REPO: ${GITHUB_REPOSITORY#*/}
+      # PRJ_VERSION: ${GITHUB_REF_NAME}
+      PRJ_REPO: ${{ github.event.repository.name }}
       KIPRJ_DIR_ARRAY: "hardware*"
       # BOMVERIFIERARG: "-qty=1 -lcsc=sku -lcscRW=pn -promelec -elitan"
       # PREVCOLUMN: "qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock,promelec_consistent,promelec_stock,elitan_consistent,elitan_enough"
@@ -29,7 +29,7 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v4
     - name: Analysis/Creating a bom
-      run: kicadStock.sh
+      run: PRJ_VERSION=${GITHUB_REF_NAME} kicadStock.sh
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:

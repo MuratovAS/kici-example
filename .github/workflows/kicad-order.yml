@@ -22,7 +22,7 @@ jobs:
         SOCKS5_USERNAME: ${{ secrets.SOCKS5_USERNAME }}
         SOCKS5_PASSWORD: ${{ secrets.SOCKS5_PASSWORD }}
         USERAGENTURL: "https://raw.githubusercontent.com/Artel-Inc/metadata/refs/heads/main/userAgent.txt"
-        PRJ_REPO: ${GITHUB_REPOSITORY#*/}
+        PRJ_REPO: ${{ github.event.repository.name }}
         BOMVERIFIERARG: "-lcsc=sku -lcscRW=pn"
         PREVCOLUMN: "qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock"
     steps:
