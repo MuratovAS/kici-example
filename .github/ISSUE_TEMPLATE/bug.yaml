@@ -1,0 +1,37 @@
+name: Bug Report
+description: Bug report form
+title: "[bug]: Something broke"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Briefly formulate what the problem is and write it in the title.
+
+  - type: input
+    id: release
+    attributes:
+      label: "Release:"
+      description: Please specify the version according to the names on github. Sensitive to separators and case.
+      placeholder: |
+        v0.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: identifier
+    attributes:
+      label: "Serial number:"
+      description: Scan the QR code or find the sticker.
+      placeholder: "100"
+    validations:
+      required: false
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: "What happened?"
+      description: Tell us what is broken on the board.
+      value: "Everything is broken. Nothing works....."
+    validations:
+      required: true

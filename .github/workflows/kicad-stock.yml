@@ -1,0 +1,38 @@
+name: "KiCad Stock"
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+env:
+  ARTIFACT_NAME: ${{ github.event.repository.name }}_stock_${{ github.run_id }}
+
+jobs:
+  Stock:
+    runs-on: ubuntu-latest
+    container: ghcr.io/muratovas/kici:9
+    env:
+      SOCKS5_URL: ${{ secrets.SOCKS5_URL }}
+      SOCKS5_USERNAME: ${{ secrets.SOCKS5_USERNAME }}
+      SOCKS5_PASSWORD: ${{ secrets.SOCKS5_PASSWORD }}
+      USERAGENTURL: "https://raw.githubusercontent.com/Artel-Inc/metadata/refs/heads/main/userAgent.txt"
+      PRJ_VERSION: ${GITHUB_REF_NAME}
+      PRJ_REPO: ${GITHUB_REPOSITORY#*/}
+      KIPRJ_DIR_ARRAY: "hardware*"
+      # BOMVERIFIERARG: "-qty=1 -lcsc=sku -lcscRW=pn -promelec -elitan"
+      # PREVCOLUMN: "qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock,promelec_consistent,promelec_stock,elitan_consistent,elitan_enough"
+      BOMVERIFIERARG: "-lcsc=sku -lcscRW=pn"
+      PREVCOLUMN: "qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock"
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+    - name: Analysis/Creating a bom
+      run: kicadStock.sh
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+        path: build
+        if-no-files-found: warn
