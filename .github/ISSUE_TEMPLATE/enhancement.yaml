@@ -3,25 +3,25 @@ description: Enhancement form
 title: "[enhancement]: Great idea"
 labels: ["enhancement"]
 body:
-	- type: markdown
-		attributes:
-			value: |
-				Briefly formulate the idea/suggestion and write it in the title.
+  - type: markdown
+    attributes:
+      value: |
+        Briefly formulate the idea/suggestion and write it in the title.
 
-	- type: input
-		id: release
-		attributes:
-			label: "Release:"
-			description: Please specify the version according to the names on github. Sensitive to separators and case.
-			placeholder: |
-				v0.0.0
-		validations:
-			required: true
+  - type: input
+    id: release
+    attributes:
+      label: "Release:"
+      description: Please specify the version according to the names on github. Sensitive to separators and case.
+      placeholder: |
+        v0.0.0
+    validations:
+      required: true
 
-	- type: textarea
-		id: what-happened
-		attributes:
-			label: "What and why do you want to improve it?"
-			description: Describe why we need to do this.
-		validations:
-			required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: "What and why do you want to improve it?"
+      description: Describe why we need to do this.
+    validations:
+      required: true
