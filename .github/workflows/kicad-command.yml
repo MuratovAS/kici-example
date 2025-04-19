@@ -1,54 +1,54 @@
-name: "KiCad Сommand"
+name: "KiCad Command"
 
 on:
-  issues:
-    types:
-      - labeled
+	issues:
+		types:
+			- labeled
 
 permissions:
-  contents: write
-  pull-requests: write
-  issues: read
+	contents: write
+	pull-requests: write
+	issues: read
 
 jobs:
-  Command:
-    runs-on: ubuntu-latest
-    container: ghcr.io/muratovas/kici:9
-    steps:
-    - name: Check out repository code
-      uses: actions/checkout@v4
+	Command:
+		runs-on: ubuntu-latest
+		container: ghcr.io/muratovas/kici:9
+		steps:
+		- name: Check out repository code
+			uses: actions/checkout@v4
 
-    - name: Issue to markdown
-      uses: MuratovAS/issue-to-markdown@v1.2.3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        dest: 'build'
-        label: 'command'
-        
-    - name: Checking issue file
-      id: checking-issue
-      run: |
-        if [ -f build/${{ github.event.issue.number }}/index.md ]; then echo "skipIssue=false" > $GITHUB_OUTPUT; fi         
-      
-    - name: Command Processing
-      if: ${{ steps.checking-issue.outputs.skipIssue == 'false' }}
-      id: command-processing
-      run: kicadCommand.sh build/${{ github.event.issue.number }}/index.md
+		- name: Issue to markdown
+			uses: MuratovAS/issue-to-markdown@v1.2.3
+			with:
+				token: ${{ secrets.GITHUB_TOKEN }}
+				dest: 'build'
+				label: 'command'
+				
+		- name: Checking issue file
+			id: checking-issue
+			run: |
+				if [ -f build/${{ github.event.issue.number }}/index.md ]; then echo "skipIssue=false" > $GITHUB_OUTPUT; fi         
+			
+		- name: Command Processing
+			if: ${{ steps.checking-issue.outputs.skipIssue == 'false' }}
+			id: command-processing
+			run: kicadCommand.sh build/${{ github.event.issue.number }}/index.md
 
-    - name: Clean source file
-      if: ${{ steps.checking-issue.outputs.skipIssue == 'false' }}
-      run: rm -rf build
-                
-    - name: Create Pull Request
-      if: ${{ steps.checking-issue.outputs.skipIssue == 'false' }}
-      uses: peter-evans/create-pull-request@v6
-      with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: |
-            Updating from "${{ github.event.issue.title }}"
-          commit-message: |
-            Updating from #${{ github.event.issue.number }}  
-          body: |
-            The list of actions is described in issue:
-            - #${{ github.event.issue.number }}
-          branch: command-${{ github.event.issue.number }}
+		- name: Clean source file
+			if: ${{ steps.checking-issue.outputs.skipIssue == 'false' }}
+			run: rm -rf build
+								
+		- name: Create Pull Request
+			if: ${{ steps.checking-issue.outputs.skipIssue == 'false' }}
+			uses: peter-evans/create-pull-request@v6
+			with:
+					token: ${{ secrets.GITHUB_TOKEN }}
+					title: |
+						Updating from "${{ github.event.issue.title }}"
+					commit-message: |
+						Updating from #${{ github.event.issue.number }}  
+					body: |
+						The list of actions is described in issue:
+						- #${{ github.event.issue.number }}
+					branch: command-${{ github.event.issue.number }}

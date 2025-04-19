@@ -3,26 +3,26 @@ description: Kicad command report
 title: "[command]: what are you doing"
 labels: ["command"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        The commands described here apply to the main branch.
-      
-  - type: textarea
-    id: commands
-    attributes:
-      label: "List of commands:"
-      description: |
-        [for robot]
-        Use the `/CHG` operator to replace text in a project.
-        You can only make replacements for existing fields.
-        Preferably use `lcsc pn`.
-        ```
-        /CHG WORD1 WORD2
-        /CHG C528661 C528762
-        /CHG 9000121574 9000322621
-        /CHG CA-IS3020S CA-IS3021S
-        ```
-      render: shell
-    validations:
-      required: true
+	- type: markdown
+		attributes:
+			value: |
+				The commands described here apply to the main branch.
+			
+	- type: textarea
+		id: commands
+		attributes:
+			label: "List of commands:"
+			description: |
+				[for robot]
+				Use the `/CHG` operator to replace text in a project.
+				You can only make replacements for existing fields.
+				Preferably use `lcsc pn`.
+				```
+				/CHG WORD1 WORD2
+				/CHG C528661 C528762
+				/CHG 9000121574 9000322621
+				/CHG CA-IS3020S CA-IS3021S
+				```
+			render: shell
+		validations:
+			required: true

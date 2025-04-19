@@ -1,31 +1,31 @@
 name: "KiCad Rules Check"
 
 on:
-  push:
-    paths:
-      - 'hardware*/*.kicad_pro'
-      - 'hardware*/*.kicad_sch'
-      - 'hardware*/*.kicad_pcb'
-      - 'hardware*/*.kicad_dru'
-  pull_request:
-    paths:
-      - 'hardware*/*.kicad_pro'
-      - 'hardware*/*.kicad_sch'
-      - 'hardware*/*.kicad_pcb'
-      - 'hardware*/*.kicad_dru'
+	push:
+		paths:
+			- 'hardware*/*.kicad_pro'
+			- 'hardware*/*.kicad_sch'
+			- 'hardware*/*.kicad_pcb'
+			- 'hardware*/*.kicad_dru'
+	pull_request:
+		paths:
+			- 'hardware*/*.kicad_pro'
+			- 'hardware*/*.kicad_sch'
+			- 'hardware*/*.kicad_pcb'
+			- 'hardware*/*.kicad_dru'
 
 jobs:
-  Checking:
-    runs-on: ubuntu-latest
-    container: ghcr.io/muratovas/kici:9
-    steps:
-    - name: Check out repository code
-      uses: actions/checkout@v4
-      
-    - name: Run ERC
-      if: success() || failure()
-      run: kicadRulesCheck.sh -e
-      
-    - name: Run DRC
-      if: success() || failure()
-      run: kicadRulesCheck.sh -d
+	Checking:
+		runs-on: ubuntu-latest
+		container: ghcr.io/muratovas/kici:9
+		steps:
+		- name: Check out repository code
+			uses: actions/checkout@v4
+			
+		- name: Run ERC
+			if: success() || failure()
+			run: kicadRulesCheck.sh -e
+			
+		- name: Run DRC
+			if: success() || failure()
+			run: kicadRulesCheck.sh -d

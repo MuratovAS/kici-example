@@ -3,101 +3,101 @@ description: Kicad order report form
 title: "[order]: XXXXXX-YYMMDD"
 labels: ["order"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Please include the PCB manufacturer name and order date.
-        Example title: `JLC-240625`, `JLCPCB-240625`, `REZONIT-240625`
-        
-  - type: input
-    id: release
-    attributes:
-      label: "Release:"
-      description: |
-        [for robot] 
-        Please specify the version according to the names on github. Sensitive to separators and case.
-      placeholder: "v0.0.0"
-    validations:
-      required: true
+	- type: markdown
+		attributes:
+			value: |
+				Please include the PCB manufacturer name and order date.
+				Example title: `JLC-240625`, `JLCPCB-240625`, `REZONIT-240625`
+				
+	- type: input
+		id: release
+		attributes:
+			label: "Release:"
+			description: |
+				[for robot] 
+				Please specify the version according to the names on github. Sensitive to separators and case.
+			placeholder: "v0.0.0"
+		validations:
+			required: true
 
-  - type: input
-    id: directory
-    attributes:
-      label: "Directory:"
-      description: |
-        [for robot] 
-        Please specify the kicad project directory. Sensitive to separators and case.
-      placeholder: "hardware"
-    validations:
-      required: true
+	- type: input
+		id: directory
+		attributes:
+			label: "Directory:"
+			description: |
+				[for robot] 
+				Please specify the kicad project directory. Sensitive to separators and case.
+			placeholder: "hardware"
+		validations:
+			required: true
 
-      
-  - type: dropdown
-    id: smtType
-    attributes:
-      label: "Will the PCB be assembled?"
-      description: |
-        [for robot]
-        Will the PCB manufacturer do the assembly? Specify layer.
-        If you are going to perform a build, please indicate in `notes` who is performing it.
-      options:
-        - "no"
-        - top
-        - bottom
-        - both
-      default: 1
-    validations:
-      required: true
+			
+	- type: dropdown
+		id: smtType
+		attributes:
+			label: "Will the PCB be assembled?"
+			description: |
+				[for robot]
+				Will the PCB manufacturer do the assembly? Specify layer.
+				If you are going to perform a build, please indicate in `notes` who is performing it.
+			options:
+				- "no"
+				- top
+				- bottom
+				- both
+			default: 1
+		validations:
+			required: true
 
-  - type: dropdown
-    id: extendedBom-auto
-    attributes:
-      label: "Is it necessary to add components to `extended bom` that are missing in jlc?"
-      description: |
-        [for robot]
-        `yes` - Add missing parts to lcsc in `extended bom`, taking into account the selected assembly type.
-        `no` - I will manually write `extended bom`
-      options:
-        - "yes"
-        - "no"
-      default: 1
-    validations:
-      required: true
+	- type: dropdown
+		id: extendedBom-auto
+		attributes:
+			label: "Is it necessary to add components to `extended bom` that are missing in jlc?"
+			description: |
+				[for robot]
+				`yes` - Add missing parts to lcsc in `extended bom`, taking into account the selected assembly type.
+				`no` - I will manually write `extended bom`
+			options:
+				- "yes"
+				- "no"
+			default: 1
+		validations:
+			required: true
 
-  - type: input
-    id: quantity
-    attributes:
-      label: "Quantity:"
-      description: Number of boards assembled.
-      placeholder: "10"
-    validations:
-      required: true
-      
-  - type: textarea
-    id: extendedBom-list
-    attributes:
-      label: "List designators for `extended bom`:"
-      description: |
-        [for robot] 
-        List the `Designators` that should be in the `extended BOM`.
-        Use `,` as a separator. All spaces and newlines are ignored.
-        Parts from layers without soldering, do not specify. They will be added automatically.
-        Example:
-        ```
-        C10-C20,
-        U1, U2,U8,
-        R4
-        ```
-      render: extendedBom
-    validations:
-      required: false
+	- type: input
+		id: quantity
+		attributes:
+			label: "Quantity:"
+			description: Number of boards assembled.
+			placeholder: "10"
+		validations:
+			required: true
+			
+	- type: textarea
+		id: extendedBom-list
+		attributes:
+			label: "List designators for `extended bom`:"
+			description: |
+				[for robot] 
+				List the `Designators` that should be in the `extended BOM`.
+				Use `,` as a separator. All spaces and newlines are ignored.
+				Parts from layers without soldering, do not specify. They will be added automatically.
+				Example:
+				```
+				C10-C20,
+				U1, U2,U8,
+				R4
+				```
+			render: extendedBom
+		validations:
+			required: false
 
-  - type: textarea
-    id: special-notes
-    attributes:
-      label: "Special notes:"
-      description: |
-        [for people] 
-        Write here what you changed in the order.
-    validations:
-      required: false
+	- type: textarea
+		id: special-notes
+		attributes:
+			label: "Special notes:"
+			description: |
+				[for people] 
+				Write here what you changed in the order.
+		validations:
+			required: false
