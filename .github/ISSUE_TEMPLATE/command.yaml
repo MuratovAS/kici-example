@@ -18,10 +18,14 @@ body:
         You can only make replacements for existing fields.
         Preferably use `lcsc pn`.
         ```
-        /CHG WORD1 WORD2
+        /CHG WORD1 WORD2 # Search and replace
         /CHG C528661 C528762
-        /CHG 9000121574 9000322621
         /CHG CA-IS3020S CA-IS3021S
+        /PROPHIDE PROP,PROP # Hides the parameter of parts in the diagram
+        /PROPHIDE pn,lcsc,mouser,digikey
+        /PROPHIDE elitan,farmell,promelec,smdru,chipdip,electronshik
+        /PROPEDIT search_name search_value change_name change_value # Allows you not only to replace but also to add parameters
+        /PROPEDIT lcsc C1980 promelec 108672
         ```
       render: shell
     validations:

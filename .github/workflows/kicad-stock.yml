@@ -29,10 +29,26 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v4
     - name: Analysis/Creating a bom
-      run: PRJ_VERSION=${GITHUB_REF_NAME} kicadStock.sh
+      run: PRJ_VERSION=${GITHUB_REF_NAME} kicadStock.sh schPropEdit
+
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.ARTIFACT_NAME }}
         path: build
         if-no-files-found: warn
+
+    - name: Clean source file
+      run: rm -rf build
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v6
+      with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: |
+            Updating from "${{ env.ARTIFACT_NAME }}"
+          commit-message: |
+            Updating from #${{ env.ARTIFACT_NAME }}
+          body: |
+           This PR was created automatically by the action system 
+          branch: stock-${{ github.event.issue.number }}
