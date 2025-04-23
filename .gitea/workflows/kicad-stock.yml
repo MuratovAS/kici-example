@@ -1,0 +1,58 @@
+name: "KiCad Stock"
+
+on:
+  # push:
+  #   tags:
+  #     - 'v*.*.*'
+  workflow_dispatch:
+
+env:
+  ARTIFACT_NAME: ${{ github.event.repository.name }}_stock_${{ github.run_id }}
+
+jobs:
+  Stock:
+    runs-on: debian
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
+    - name: Analysis/Creating a bom
+      uses: docker://ghcr.io/muratovas/kici:9
+      env:
+        USERAGENTURL: "https://raw.githubusercontent.com/Artel-Inc/metadata/refs/heads/main/userAgent.txt"
+        # PRJ_VERSION: ${GITHUB_REF_NAME}
+        PRJ_REPO: ${{ github.event.repository.name }}
+        KIPRJ_DIR_ARRAY: "hardware*"
+        BOMVERIFIERARG: "-lcsc=sku -lcscRW=pn"
+        PREVCOLUMN: "qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock"
+      with:
+        entrypoint: /bin/sh
+        args: |
+          "-c" 
+          "PRJ_VERSION=${GITHUB_REF_NAME} \
+          kicadStock.sh schPropEdit"
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+#        path: build
+        path: |
+          build
+          hardware*
+        if-no-files-found: warn
+
+#     - name: Clean source file
+#       run: rm -rf build
+# 
+#     - name: Create Pull Request
+#       uses: peter-evans/create-pull-request@v6
+#       with:
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           title: |
+#             Updating from "${{ env.ARTIFACT_NAME }}"
+#           commit-message: |
+#             Updating from #${{ env.ARTIFACT_NAME }}
+#           body: |
+#            This PR was created automatically by the action system 
+#           branch: stock-${{ github.event.issue.number 

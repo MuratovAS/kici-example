@@ -1,0 +1,68 @@
+name: "KiCad Order"
+
+on:
+  issues:
+    types:
+      - labeled
+
+env:
+  ARTIFACT_NAME: ${{ github.event.repository.name }}_order_issue${{ github.event.issue.number }}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  Order:
+    runs-on: debian
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
+    - name: Issue to markdown
+      uses: MuratovAS/issue-to-markdown@v1.2.3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        dest: 'build'
+        label: 'order'
+        
+    - name: Checking issue file
+      id: checking-issue
+      run: |
+        if [ -f build/${{ github.event.issue.number }}/index.md ]; then echo "skipIssue=false" > $GITHUB_OUTPUT; fi         
+      
+    - name: Order Processing
+      if: ${{ steps.checking-issue.outputs.skipIssue == 'false' }}
+      id: command-processing
+      uses: docker://ghcr.io/muratovas/kici:9
+      env:
+        USERAGENTURL: "https://raw.githubusercontent.com/Artel-Inc/metadata/refs/heads/main/userAgent.txt"
+        PRJ_REPO: ${{ github.event.repository.name }}
+        BOMVERIFIERARG: "-lcsc=sku -lcscRW=pn"
+        PREVCOLUMN: "qty,pn,lcsc,lcsc_sku,lcsc_consistent,lcsc_stock"
+      with:
+        entrypoint: /bin/sh
+        args: |
+          "-c" 
+          "git config http.sslVerify false; \
+          kicadOrder.sh build/${{ github.event.issue.number }}/index.md"
+    
+    - name: Upload artifact
+      if: ${{ steps.checking-issue.outputs.skipIssue == 'false' }}
+      id: upload-artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+        path: |
+          build
+
+    - name: Create comment
+      if: ${{ steps.checking-issue.outputs.skipIssue == 'false' }}
+      uses: peter-evans/create-or-update-comment@v4
+      with:
+        issue-number: ${{ github.event.issue.number }}
+        #${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        body: |
+          EXTENDED BOM:
+          ${{ steps.upload-artifact.outputs.artifact-url }}
+          NOTE: Requires re-checking
