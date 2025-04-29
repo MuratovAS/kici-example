@@ -1776,10 +1776,6 @@
 		(at 44.45 127)
 		(uuid "744dcedf-da36-4f19-9239-067a96c8a273")
 	)
-	(no_connect
-		(at 44.45 124.46)
-		(uuid "c30d071f-8217-4eea-baff-02ecb75ec829")
-	)
 	(wire
 		(pts
 			(xy 100.33 54.61) (xy 102.87 54.61)
